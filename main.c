@@ -8,18 +8,22 @@ void receiveNames(int number) {
 
     int plusCounter = 0;
     int minusCounter = 0;
-    char * str[number+1][21]; 
+    char * str[number][24], temp; 
     char t[21];
     int i, j;
 
-    for(i=0; i<number+1; i++)
+    for(i=0; i<number; i++)
     {
-        fgets(str[i], 21, stdin);
+        scanf(" %c%s", &temp, &str[i]);
+        if(temp == '+')
+          plusCounter++;
+        else
+          minusCounter++;
     }
 
-    for(i=1; i<number+1; i++)
+    for(i=1; i<number; i++)
     {
-        for(j=1; j<number+1; j++)
+        for(j=1; j<number; j++)
         {
             if(strcmp(str[j-1], str[j])>0)
             {
@@ -29,26 +33,23 @@ void receiveNames(int number) {
             }
         }
     }
-     for(i=0; i<number+1; i++)
+
+    for(i=0; i<number; i++)
     {
         if(str[i][0] == '+')
             plusCounter++;
         else if(str[i][0] ==  '-')
             minusCounter++;
-        
-        if (str[i][0] == '-' || str[i][0] == '+') 
-            memmove(str[i], str[i]+2, strlen(str[i]));
-
-        printf("%s",str[i]);
+            
+        printf("%s\n",str[i]);
     }
-
-        printf("\nSe comportaram: %d | Nao se comportaram: %d\n", plusCounter, minusCounter);
+        printf("Se comportaram: %d | Nao se comportaram: %d\n", plusCounter, minusCounter);
 }
 
 
-
-void main() {
+int main() {
     int iterationNumber;
     scanf("%d", &iterationNumber);
     receiveNames(iterationNumber);
+   return 0;
 }
